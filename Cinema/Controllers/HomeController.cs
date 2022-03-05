@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 using Cinema.Models;
 
 namespace Cinema.Controllers
@@ -18,9 +19,11 @@ namespace Cinema.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
-            return View();
+            return Content(User.Identity.Name);
+            //return View();
         }
 
         public IActionResult Privacy()

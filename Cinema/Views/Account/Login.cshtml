@@ -1,4 +1,4 @@
-@model Cinema.ViewModels.LoginModel
+п»ї@model Cinema.ViewModels.LoginModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,13 +15,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-    <title>Кинотеатр Лотос. Авторизация</title>
+    <title>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</title>
 </head>
 <body>
     <header>
         <div class="headercontent">
             <img src="img/logo.png" style="width: 60px;height: 40px;float: left;margin-left: 100px; margin-right: 10px;">
-            <h1>Кинотеатр "Лотос"</h1>
+            <h1>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ"</h1>
         </div>
     </header>
     <div class="wrapper">
@@ -32,38 +32,38 @@
         <div class="burger-line third"></div>
         <div class="burger-line fourth"></div>
         <nav class="main-menu">
-            <a href="index.html">Афиша</a>
-            <a href="#">Расписание</a>
-            <a href="#">Информация о кинотеатре</a>
-            <a href="Login.cshtml">Личный кабинет</a>
-            <a href="#">Акции и новости</a>
+            <a href="index.html">пїЅпїЅпїЅпїЅпїЅ</a>
+            <a href="#">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a>
+            <a href="#">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a>
+            <a href="Login.cshtml">пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a>
+            <a href="#">пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a>
         </nav>
     </div>
     <div class="content">
         <form asp-action="Login" asp-controller="Account" asp-anti-forger="true">
             <div class="auth">
-                <h1 id="authTxt">Авторизация</h1><br>
+                <h1 id="authTxt">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</h1><br>
                 <div class="phone">
-                    <span id="phoneTxt">Номер телефона:</span>
-                    <input asp-for="Phone" id="phoneInp" type="tel" title="Номер телефона" />
+                    <span id="phoneTxt">пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</span>
+                    <input asp-for="Phone" id="phoneInp" type="tel" title="пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" />
                 </div>
                 <div class="password">
-                    <span id="passwordTxt">Пароль:</span>
-                    <input asp-for="Password" id="passInp" type="password" title="Пароль">
+                    <span id="passwordTxt">РџР°СЂРѕР»СЊ:</span>
+                    <input asp-for="Password" id="passInp" type="password" title="пїЅпїЅпїЅпїЅпїЅпїЅ">
                 </div>
-                <button onclick="authButtonClick()">Войти</button><br>
+                <button onclick="authButtonClick()">пїЅпїЅпїЅпїЅпїЅ</button><br>
                 <span id="errNote"></span><br>
-                <span id="registerNote">Если вы еще не зарегистрированы, нажмите на <a asp-action="Login" asp-controller="Account" id="regWord" onclick="registerClick()">регистрация</a>.</span>
+                <span id="registerNote">пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ <a asp-action="Register" asp-controller="Account" id="regWord">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a>.</span>
 
             </div>
         </form>
     </div>
     <footer>
-        Афиша
-        Расписание
-        Информация о кинотеатре
-        Личный кабинет
-        Акции и новости
+        пїЅпїЅпїЅпїЅпїЅ
+        пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     </footer>
 </body>
 </html>

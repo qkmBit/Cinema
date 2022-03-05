@@ -13,8 +13,8 @@ namespace Cinema.Controllers
 {
     public class AccountController : Controller
     {
-        private UserContext db;
-        public AccountController(UserContext context)
+        private CinemaContext db;
+        public AccountController(CinemaContext context)
         {
             db = context;
         }
@@ -51,7 +51,7 @@ namespace Cinema.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await db.User.FirstOrDefaultAsync(u => u.Phone == model.Phone);
+                User user = await db.User.FirstOrDefaultAsync(u => u.UserPhone == model.Phone);
                 if (user == null)
                 {
                     // добавляем пользователя в бд
