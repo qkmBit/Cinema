@@ -1,8 +1,87 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Афиша";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="content">
+    <div class="afisha">
+        <div class="Test">
+            <div class="img" onclick="showVPlayer(event)">
+                <img id="afimg" src="img/spider-man.jpg" width="100%" height="100%">
+            </div>
+            <div class="PicCount">
+                <span class="FirstPic" role="button" onclick="FPClick()"></span>
+                <span class="SecondPic" role="button" onClick="SPClick()"></span>
+                <span class="ThirdPic" role="button" onclick="TPClick()"></span>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </div>
+    <span id="Aftxt">Афиша</span>
+    <div class="FilmList">
+        <div class="Film">
+            <div class="FilmPoster">
+                <img src="img/uncharted4.jpg" width="100%" height="100%" onclick="showVPlayer(event)">
+            </div>
+            <div class="FilmName">
+                <span onclick="showFilmPage()">Анчартед: На картах не значится</span>
+            </div>
+            <div class="FilmGenres">
+                <span id="filmGenres">Боевик, приключения </span>
+            </div>
+            <div class="FilmActualSessions">
+                <div class="Session">
+                    <span>
+                        14:00<br>
+                        3D
+                    </span>
+                </div>
+                <div class="Session">
+                    <span>
+                        16:00<br>
+                        3D
+                    </span>
+                </div>
+                <div class="Session">
+                    <span>
+                        18:00<br>
+                        3D
+                    </span>
+                </div>
+                <div class="Session">
+                    <span>
+                        20:00<br>
+                        3D
+                    </span>
+                </div>
+                <div class="Session">
+                    <span>
+                        20:00<br>
+                        2D
+                    </span>
+                </div>
+                <div class="Session">
+                    <span>
+                        22:00<br>
+                        3D
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="FilmFullPage">
+        <div class="FilmTrailer">
+            <img src="img/uncharted4.jpg" width="100%" height="100%" onclick="showVPlayer(event)">
+        </div>
+        <div class="FilmInfo">
+            <span class="FilmName">Skaleetien</span>
+            <span class="FilmCountry"></span>
+            <span class="Genres"></span>
+            <span class="FilmDirector"></span>
+            <span class="Duration"></span>
+        </div>
+        <div class="FilmDesc"></div>
+        <div class="FilmSessionList"></div>
+    </div>
+
 </div>
