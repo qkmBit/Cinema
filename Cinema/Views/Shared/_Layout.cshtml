@@ -6,29 +6,30 @@
     <title>@ViewData["Title"] - Cinema</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cinema</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div class="headercontent">
+            <img src="img/logo.png" style="width: 60px;height: 40px;float: left;margin-left: 100px; margin-right: 10px;">
+            <h1>Кинотеатр "Лотос"</h1>
+        </div>
     </header>
+    <div class="wrapper">
+        <input type="checkbox" id="checkmenu">
+        <label for="checkmenu"></label>
+        <div class="burger-line first"></div>
+        <div class="burger-line second"></div>
+        <div class="burger-line third"></div>
+        <div class="burger-line fourth"></div>
+        <nav class="main-menu">
+            <a href="index.html">Афиша</a>
+            <a href="#">Расписание</a>
+            <a href="#">Информация о кинотеатре</a>
+            <a href="Auth.html">Личный кабинет</a>
+            <a href="#">Акции и новости</a>
+        </nav>
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
