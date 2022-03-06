@@ -22,8 +22,7 @@ namespace Cinema.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return Content(User.Identity.Name);
-            //return View();
+            return View();
         }
 
         public IActionResult Privacy()
