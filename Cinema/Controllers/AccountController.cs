@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Claims;
-using Cinema.ViewModels; // пространство имен моделей RegisterModel и LoginModel
-using Cinema.Models; // пространство имен UserContext и класса User
+using Cinema.ViewModels;
+using Cinema.Models; 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -19,6 +19,7 @@ namespace Cinema.Controllers
             db = context;
         }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -41,6 +42,7 @@ namespace Cinema.Controllers
             return View(model);
         }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
@@ -61,6 +63,28 @@ namespace Cinema.Controllers
                     await Authenticate(model.Phone); // аутентификация
 
                     return RedirectToAction("Index", "Home");
+                }
+                else
+                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+            }
+            return View(model);
+        }
+        [HttpGet]
+        [Authorize]
+        public IActionResult Profile()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(User model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await db.User.FirstOrDefaultAsync(u => User.Identity.Name == model.UserPhone);
+                if (user != null)
+                {
+                    return RedirectToAction("Profile", "Home");
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");

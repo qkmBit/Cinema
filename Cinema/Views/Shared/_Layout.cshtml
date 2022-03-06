@@ -10,31 +10,29 @@
 </head>
 <body>
     <header>
+        <div class="wrapper">
+            <input type="checkbox" id="checkmenu">
+            <label for="checkmenu"></label>
+            <div class="burger-line first"></div>
+            <div class="burger-line second"></div>
+            <div class="burger-line third"></div>
+            <div class="burger-line fourth"></div>
+            <nav class="main-menu">
+                <a href="index.html">Афиша</a>
+                <a href="#">Расписание</a>
+                <a href="#">Информация о кинотеатре</a>
+                <a asp-action="Profile" asp-controller="Account">Личный кабинет</a>
+                <a href="#">Акции и новости</a>
+            </nav>
+        </div>
         <div class="headercontent">
             <img src="img/logo.png" style="width: 60px;height: 40px;float: left;margin-left: 100px; margin-right: 10px;">
             <h1>Кинотеатр "Лотос"</h1>
         </div>
     </header>
-    <div class="wrapper">
-        <input type="checkbox" id="checkmenu">
-        <label for="checkmenu"></label>
-        <div class="burger-line first"></div>
-        <div class="burger-line second"></div>
-        <div class="burger-line third"></div>
-        <div class="burger-line fourth"></div>
-        <nav class="main-menu">
-            <a href="index.html">Афиша</a>
-            <a href="#">Расписание</a>
-            <a href="#">Информация о кинотеатре</a>
-            <a href="Auth.html">Личный кабинет</a>
-            <a href="#">Акции и новости</a>
-        </nav>
-    </div>
-    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
 
     <footer>
         Афиша

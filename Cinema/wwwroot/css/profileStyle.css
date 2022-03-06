@@ -1,0 +1,63 @@
+.content{
+    height: 750px;
+}
+.pr{
+    position: absolute;
+    display: flex;
+    margin-top: 60px;
+}
+.profile{
+    display: block;
+    margin-left: 20px;
+    font-family: 'Ubuntu', sans-serif;
+}
+.userHistory{
+    margin-left: 100px;
+    display: block;
+    font-family: 'Ubuntu', sans-serif;
+}
+#order{
+    color:rgb(255, 255, 255);
+    font-size: 18px;
+    display: grid;
+}
+#profileTxt{
+    margin-left: auto;
+    color: rgb(255, 255, 255);
+}
+.userInfo{
+    color: rgb(255, 255, 255);
+    display:grid;
+    font-size: 18px;
+}
+button{
+    display: block;
+    margin: 20px auto;
+    font-weight: bold;
+    font-size: 16px;
+    width: 300px;
+    height: 40px;
+    color: rgb(200, 200, 200);
+    border: 1px solid rgb(140,140,140,0.7);
+    border-radius: 5px;
+    background-color:rgb(60, 60, 60,0);
+    cursor: pointer;
+    transition: .2s;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+button:hover{
+    color:rgb(255, 255, 255);
+    background-color: rgb(140,140,140,0.7);
+}
+button:active{
+    transition: .1s;
+    transform: translateY(1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+}
+#logoutButton{
+    color: rgb(255, 35, 35);
+}
+#logoutButton:hover{
+    background-color: rgb(255, 35, 35);
+    color: black;
+}

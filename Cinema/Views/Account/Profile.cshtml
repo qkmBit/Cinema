@@ -1,0 +1,23 @@
+@model Cinema.Models.User
+@{
+    ViewData["Title"] = "Профиль";
+    ViewData["Css"] = "profileStyle.css"
+}
+
+<div class="content">
+    <div class="pr">
+        <div class="profile">
+            <h1 id="profileTxt">Личный кабинет</h1><br>
+            <div class="userInfo">
+                <span id="phoneTxt">Номер телефона: @UserPhone</span>
+                <span id="EmailTxt">Email пользователя: @UserEmail</span>
+            </div>
+            <button>Редактировать данные</button>
+            <button id="logoutButton">Выйти из аккаунта</button>
+        </div>
+        <div class="userHistory">
+            <h1 id="profileTxt">Список заказов</h1>
+            <span id="order">Заказ</span>
+        </div>
+    </div>
+</div>
