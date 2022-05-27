@@ -7,7 +7,7 @@ namespace Cinema.Models
     {
         public Session()
         {
-            Ticket = new HashSet<Ticket>();
+            Ticket = new List<Ticket>();
         }
 
         public long SessionId { get; set; }
@@ -17,6 +17,6 @@ namespace Cinema.Models
 
         public virtual Film Film { get; set; }
         public virtual Hall Hall { get; set; }
-        public virtual ICollection<Ticket> Ticket { get; set; }
+        public virtual List<Ticket> Ticket { get; set; }
     }
 }

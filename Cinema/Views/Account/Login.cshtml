@@ -7,20 +7,26 @@
 
 
     <div class="content">
-        <form asp-action="Login" asp-controller="Account" asp-anti-forger="true">
+        <form asp-action="Login" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl" asp-anti-forger="true">
             <div class="auth">
                 <h1 id="authTxt">Авторизация</h1><br>
-                <div class="phone">
-                    <span id="phoneTxt">Введите номре телефона:</span>
-                    <input asp-for="Phone" id="phoneInp" type="tel" title="Номер телефона" />
-                </div>
-                <div class="password">
-                    <span id="passwordTxt">Пароль:</span>
-                    <input asp-for="Password" id="passInp" type="password" title="Пароль">
+                <div class="input-group">
+                    <div class="phone">
+                        <span id="phoneTxt">Введите номре телефона:</span>
+                        <input asp-for="Phone" id="phoneInp" type="tel" title="Номер телефона" />
+                    </div>
+                    <div class="password">
+                         <span id="passwordTxt">Пароль:</span>
+                         <input asp-for="Password" id="passInp" type="password" title="Пароль">
+                    </div>
+                    </div>
+                <div>
+                    <label asp-for="RememberMe"></label><br />
+                    <input asp-for="RememberMe" />
                 </div>
                 <button onclick="authButtonClick()">Войти</button><br>
-                <span id="errNote"></span><br>
-                <span id="registerNote">Если вы ещее не зарегистрированы, нажмите на <a asp-action="Register" asp-controller="Account" id="regWord">регистрация</a>.</span>
+                <div asp-validation-summary="ModelOnly"></div><br>
+                <span id="registerNote">Если вы еще не зарегистрированы, нажмите на <a asp-action="Register" asp-controller="Account" id="regWord">регистрация</a>.</span>
 
             </div>
         </form>

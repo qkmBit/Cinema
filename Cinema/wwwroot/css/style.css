@@ -18,7 +18,7 @@
 #checkmenu{
     display: none;
 }
-label{
+.wrapper label{
     display: block;
     position: absolute;
     top: 0;
@@ -57,7 +57,7 @@ label{
     transition: .2s all;
     background-color: rgb(73, 73, 73,0.4);
 }
-a{
+.main-menu a{
     display: block;
     width: 100%;
     padding: 10px;
@@ -68,9 +68,9 @@ a{
     border-bottom: 1px solid rgba(255, 255, 255, .3);
     border-right: 1px solid rgba(255, 255, 255, .3);
 }
-a:hover{
-    color:lightblue;
-}
+    .main-menu a:hover {
+        color: lightblue;
+    }
 #checkmenu:checked ~.main-menu{
     max-height: 500px;
     font-size: 16px;
@@ -146,15 +146,16 @@ footer{
     z-index: -1;
     cursor: pointer;
 }
-.PicCount{
+.PicCount {
     position: absolute;
     display: flex;
     align-items: center;
     bottom: 5%;
     width: 100%;
     z-index: 1;
+    justify-content: center;
 }
-.FirstPic,.SecondPic,.ThirdPic{
+.PicCount span{
     width: 12px;
     height: 12px;
     display: block;
@@ -162,10 +163,6 @@ footer{
     cursor: pointer;
     margin-left: 10px;
     background-color: rgb(255,255,255,0.4);
-}
-.FirstPic{
-    background-color: rgb(255,255,255);
-    margin-left: 50%;
 }
 .prev,.next{
     cursor: pointer;
@@ -236,20 +233,77 @@ footer{
     width: 100%;
     height: 100%;
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     background-color: rgba(40, 40, 40, 0.6);
     z-index: 2;
+}
+.FilmFullPage .FilmActualSessions{
+    margin-left: 15px;
+    width: 100%;
+    height: max-content;
+    margin-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.FilmFullPage #SessionTxt{
+    margin-left: 20px;
+    width: 100%;
+    font-family: sans-serif;
+    font-size:x-large;
+}
+.FilmFPContent{
+    position: fixed;
+    margin-top: 5%;
+    width: 80%;
+    height: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    border: 1px;
+    border-color: black;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+}
+.FilmTrailer{
+    height: 70%;
+    margin-top: 25px;
+    margin-left: 15px;
+}
+.FilmFullInfo{
+    margin-top: 25px;
+    margin-left: 10px;
+    flex:auto;
+    width: min-content;
+    height: max-content;
+}
+.FilmInfo{
+    font-family: sans-serif;
+    font-size:large;
+}
+.FilmDesc{
+    font-family: sans-serif;
+    font-size:large;
+    margin-top: 10px;
+}
+.FilmInfo .FilmName{
+    color: black;
+    font-size: x-large;
+    margin-bottom: 10px;
 }
 .FilmName{
     font-size:x-large;
     font-family: sans-serif;
     color: azure;
+}
+.Film .FilmName{
     margin-left: 230px;
     position: absolute;
     margin-top: 15px;
     cursor: pointer;
 }
-.FilmName:hover{
+.Film .FilmName:hover{
     color:beige;
 }
 .FilmGenres{
@@ -260,11 +314,12 @@ footer{
     position: absolute;
     margin-top: 45px;
 }
-.FilmActualSessions{
+.Film .FilmActualSessions{
     margin-left: 220px;
     position: absolute;
     margin-top: 65px;
-    border-spacing: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .Session{
     font-size:large;
@@ -279,6 +334,11 @@ footer{
     display: table-cell;
     vertical-align: middle;
     cursor: pointer;
+    display: flex;
+    margin: 0px 5px 5px 0;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 .Session:hover{
     background-color: rgba(85, 85, 85, 1);
@@ -288,9 +348,9 @@ footer{
     width: 100%;
     height: 100%;
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     background-color: rgba(40, 40, 40, 0.6);
-    z-index: 2;
+    z-index: 3;
 }
 .CloseVP{
     position: absolute;
@@ -320,5 +380,128 @@ footer{
 #VideoPlayer{
     margin-top: 2%;
     width: 80%;
+    height: 80%;
     margin-left: 10%;
+}
+.SessionTicketList{
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    position: fixed;
+    background-color: rgba(40, 40, 40, 0.6);
+    z-index: 2;
+}
+.TicketList{
+    position: fixed;
+    margin-top: 5%;
+    width: 80%;
+    height: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    border: 1px;
+    border-color: black;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+}
+.CurrentOrder {
+    padding-top: 10px;
+    width: 20%;
+    height: 100%;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: grey;
+    font-size: large;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+.HallSchema{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.Screen{
+    height: 40px;
+    width: 90%;
+    margin-left: 5%;
+    border: solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    border-top: none;
+}
+.Row{
+    width: 100%;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+}
+.RowTxt{
+    font-size:large;
+    font-family: sans-serif;
+    align-self: center;
+}
+.Seats{
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.Seat{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    border-radius: 3px;
+    background-color: orange;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0px 10px;
+}
+.Row .free{
+    display: none;
+}
+.CurrentOrderTxt{
+    font-size:x-large;
+    display:flex;
+    
+}
+.tickets {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.ticket{
+    width:100%;
+}
+.orderSumTxt, .orderSumRes{
+    font-size: xx-large;
+    align-self: flex-end;
+}
+.orderSum {
+    margin: auto 0 0 0;
+}
+.btn-type{
+
+}
+.Lock {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    border-radius: 3px;
+    background-color: grey;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 10px;
 }

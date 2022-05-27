@@ -1,23 +1,32 @@
-@model Cinema.Models.User
-@{
-    ViewData["Title"] = "Профиль";
-    ViewData["Css"] = "profileStyle.css"
+п»ї@{
+    ViewData["Title"] = "РџСЂРѕС„РёР»СЊ";
+    ViewData["Css"] = "profileStyle.css";
+}
+@if(User.Claims.Where(u => u.Type == "Email").Select(u => u.Value).FirstOrDefault() != null)
+{
+    ViewBag.Email = User.Claims.Where(u => u.Type == "Email").Select(u => u.Value).FirstOrDefault();
+}
+else
+{
+    ViewBag.Email = "РќРµ СѓРєР°Р·Р°РЅ";
 }
 
 <div class="content">
     <div class="pr">
         <div class="profile">
-            <h1 id="profileTxt">Личный кабинет</h1><br>
+            <h1 id="profileTxt">Р›РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚</h1><br>
             <div class="userInfo">
-                <span id="phoneTxt">Номер телефона: @UserPhone</span>
-                <span id="EmailTxt">Email пользователя: @UserEmail</span>
+                <span id="phoneTxt">РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°: @User.Identity.Name</span>
+                <span id="EmailTxt">Email РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ: @ViewBag.Email </span>
             </div>
-            <button>Редактировать данные</button>
-            <button id="logoutButton">Выйти из аккаунта</button>
+            <button>Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РґР°РЅРЅС‹Рµ</button>
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <button id="logoutButton">Р’С‹Р№С‚Рё РёР· Р°РєРєР°СѓРЅС‚Р°</button>
+            </form>
         </div>
         <div class="userHistory">
-            <h1 id="profileTxt">Список заказов</h1>
-            <span id="order">Заказ</span>
+            <h1 id="profileTxt">РЎРїРёСЃРѕРє Р·Р°РєР°Р·РѕРІ</h1>
+            <span id="order">Р—Р°РєР°Р·</span>
         </div>
     </div>
 </div>

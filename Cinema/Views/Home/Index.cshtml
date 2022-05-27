@@ -1,20 +1,36 @@
-﻿@{
+﻿@model List<Cinema.Models.Film>
+@{
     ViewData["Title"] = "Афиша";
 }
 
+<script>
+    auto();
+</script>
 <div class="VPlayer" style="width: 100%; height: 100%; overflow: hidden;">
-    
+
+</div>
+<div class="FilmFullPage" style="width: 100%; height: 100%; overflow: hidden;">
+
+</div>
+<div class="SessionTicketList" style="width: 100%; height: 100%; overflow: hidden;">
+
 </div>
 <div class="content">
     <div class="afisha">
         <div class="Test">
-            <div class="img" onclick="showVPlayer(event)">
-                <img id="afimg" src="img/spider-man.jpg" width="100%" height="100%">
+            <div class="img" id="img">
+                <img src="~/images/@Model.Where(u => u.Afisha==true).FirstOrDefault().AfishaImg" width="100%" height="100%" onclick="showFilmPage(@Model.Where(u => u.Afisha==true).FirstOrDefault().FilmId)">
+                @for (int i = 0; i < Model.Where(u => u.Afisha == true).ToList().Count - 1; i++)
+                {
+                    <img src="~/images/@Model.Where(u => u.Afisha == true).ToArray()[i+1].AfishaImg" width="100%" height="100%" style="display: none;" onclick="showFilmPage(@Model.Where(u => u.Afisha == true).ToArray()[i+1].FilmId)">
+                }
             </div>
-            <div class="PicCount">
-                <span class="FirstPic" role="button" onclick="FPClick()"></span>
-                <span class="SecondPic" role="button" onClick="SPClick()"></span>
-                <span class="ThirdPic" role="button" onclick="TPClick()"></span>
+            <div class="PicCount" id="picCount">
+                <span class="Pic" role="button" onclick="FPClick(0)" id="0" style="background-color: rgba(255, 255, 255, 0.4);"></span>
+                @for (int i = 0; i < Model.Where(u => u.Afisha == true).ToList().Count - 1; i++)
+                {
+                    <span class="Pic @i" role="button" onclick="FPClick(@(i+1))"></span>
+                }
             </div>
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -22,69 +38,37 @@
     </div>
     <span id="Aftxt">Афиша</span>
     <div class="FilmList">
-        <div class="Film">
-            <div class="FilmPoster">
-                <img src="img/uncharted4.jpg" width="100%" height="100%" onclick="showVPlayer(event)">
-            </div>
-            <div class="FilmName">
-                <span onclick="showFilmPage()">Анчартед: На картах не значится</span>
-            </div>
-            <div class="FilmGenres">
-                <span id="filmGenres">Боевик, приключения </span>
-            </div>
-            <div class="FilmActualSessions">
-                <div class="Session">
-                    <span>
-                        14:00<br>
-                        3D
+        @foreach (var film in Model)
+        {
+            <div class="Film" id="@film.FilmId">
+                <div class="FilmPoster">
+                    <img src="~/images/@film.Poster" width="100%" height="100%" data-url='@Url.Action("VPlayer","Home", new { id = film.FilmId })' onclick="showVPlayer(@film.FilmId)">
+                </div>
+                <div class="FilmName">
+                    <span onclick="showFilmPage(@film.FilmId)">@film.FilmName</span>
+                </div>
+                <div class="FilmGenres">
+                    <span id="filmGenres">
+                        @for (int i = 0; i < film.MovieGenre.Count; i++)
+                        {
+                            @film.MovieGenre[i].Genre.GenreName
+                            if (!(i + 1 == film.MovieGenre.Count))
+                            {<span>, </span>}
+                        }
                     </span>
                 </div>
-                <div class="Session">
-                    <span>
-                        16:00<br>
-                        3D
-                    </span>
-                </div>
-                <div class="Session">
-                    <span>
-                        18:00<br>
-                        3D
-                    </span>
-                </div>
-                <div class="Session">
-                    <span>
-                        20:00<br>
-                        3D
-                    </span>
-                </div>
-                <div class="Session">
-                    <span>
-                        20:00<br>
-                        2D
-                    </span>
-                </div>
-                <div class="Session">
-                    <span>
-                        22:00<br>
-                        3D
-                    </span>
+                <div class="FilmActualSessions">
+                    @foreach (var session in film.Session)
+                    {
+                        <div class="Session" id="@session.SessionId" onclick="showTicketList(@session.SessionId)">
+                            <span>
+                                @session.SessionDateTime.ToString("t")<br>
+                                @session.Hall.HallType
+                            </span>
+                        </div>
+                    }
                 </div>
             </div>
-        </div>
+        }
     </div>
-    <div class="FilmFullPage">
-        <div class="FilmTrailer">
-            <img src="img/uncharted4.jpg" width="100%" height="100%" onclick="showVPlayer(event)">
-        </div>
-        <div class="FilmInfo">
-            <span class="FilmName">Skaleetien</span>
-            <span class="FilmCountry"></span>
-            <span class="Genres"></span>
-            <span class="FilmDirector"></span>
-            <span class="Duration"></span>
-        </div>
-        <div class="FilmDesc"></div>
-        <div class="FilmSessionList"></div>
-    </div>
-
 </div>

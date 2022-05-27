@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cinema.Models
 {
@@ -7,14 +9,15 @@ namespace Cinema.Models
     {
         public UserOrders()
         {
-            OrderTickets = new HashSet<OrderTickets>();
+            Tickets = new List<Ticket>();
         }
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public DateTime OrderDate { get; set; }
 
-        public virtual User User { get; set; }
-        public virtual ICollection<OrderTickets> OrderTickets { get; set; }
+        public virtual Users Use { get; set; }
+        public virtual List<Ticket> Tickets { get; set; }
     }
 }

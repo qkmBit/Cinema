@@ -8,20 +8,22 @@
         <form asp-action="Register" asp-controller="Account" asp-anti-forgery="true">
             <div class="auth">
                 <h1 id="authTxt">Регистрация</h1><br>
-                <div class="phone">
-                    <span id="phoneTxt">Номер телефона:</span>
-                    <input asp-for="Phone" id="phoneInp" type="tel" title="Номер телефона" />
+                <div class="input-group">
+                    <div class="phone">
+                        <span id="phoneTxt">Номер телефона:</span>
+                        <input asp-for="Phone" id="phoneInp" type="tel" title="Номер телефона" />
+                    </div>
+                    <div class="password">
+                        <span id="passwordTxt">Пароль:</span>
+                        <input asp-for="Password" id="passInp" type="password" title="Пароль">
+                    </div>
+                    <div class="password">
+                        <span id="passwordTxtSec">Повторите пароль:</span>
+                        <input asp-for="ConfirmPassword" id="passInpSec" type="password" title="Пароль">
+                    </div>
                 </div>
-                <div class="password">
-                    <span id="passwordTxt">Пароль:</span>
-                    <input asp-for="Password" id="passInp" type="password" title="Пароль">
-                </div>
-                <div class="password">
-                    <span id="passwordTxtSec">Повторите пароль:</span>
-                    <input asp-for="ConfirmPassword" id="passInpSec" type="password" title="Пароль">
-                </div>
-                <button onclick="authButtonClick()">Зарегистрироваться</button><br>
-                <span id="errNote"></span><br>
+                <button id="regBtn" onclick="authButtonClick()">Зарегистрироваться</button><br>
+                <div asp-validation-summary="ModelOnly"></div>
 
             </div>
         </form>

@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Cinema.Models
 {
-    public partial class CinemaContext : DbContext
+    public partial class CinemaContext : IdentityDbContext<Users>
     {
         public CinemaContext()
         {
@@ -15,28 +16,41 @@ namespace Cinema.Models
         {
         }
 
+        public virtual DbSet<Users> AspNetUsers { get; set; }
         public virtual DbSet<Film> Film { get; set; }
         public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<Hall> Hall { get; set; }
         public virtual DbSet<MovieGenre> MovieGenre { get; set; }
-        public virtual DbSet<OrderTickets> OrderTickets { get; set; }
         public virtual DbSet<Session> Session { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
-        public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<UserConfirm> UserConfirm { get; set; }
         public virtual DbSet<UserOrders> UserOrders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=LAPTOP-BRLITGLL;Database=Cinema;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.Property(e => e.ConcurrencyStamp).HasMaxLength(256);
+
+                entity.Property(e => e.Email).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+
+                entity.Property(e => e.PhoneNumber).IsRequired();
+
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
+            });
+
             modelBuilder.Entity<Film>(entity =>
             {
                 entity.Property(e => e.FilmId).ValueGeneratedNever();
@@ -97,26 +111,7 @@ namespace Cinema.Models
                     .HasConstraintName("FK_MovieGenre_Film");
             });
 
-            modelBuilder.Entity<OrderTickets>(entity =>
-            {
-                entity.HasKey(e => new { e.OrderId, e.TicketId });
-
-                entity.Property(e => e.OrderId).HasColumnName("OrderID");
-
-                entity.Property(e => e.TicketId).HasColumnName("TicketID");
-
-                entity.HasOne(d => d.Order)
-                    .WithMany(p => p.OrderTickets)
-                    .HasForeignKey(d => d.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderTickets_UserOrders");
-
-                entity.HasOne(d => d.Ticket)
-                    .WithMany(p => p.OrderTickets)
-                    .HasForeignKey(d => d.TicketId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderTickets_Ticket");
-            });
+            
 
             modelBuilder.Entity<Session>(entity =>
             {
@@ -146,49 +141,10 @@ namespace Cinema.Models
                     .WithMany(p => p.Ticket)
                     .HasForeignKey(d => d.SessionId)
                     .HasConstraintName("FK_SessionSeat_Session");
-            });
-
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.Property(e => e.UserId)
-                    .HasColumnName("UserID")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.HashPassword)
-                    .IsRequired()
-                    .HasMaxLength(40);
-
-                entity.Property(e => e.RegistrationDate).HasColumnType("date");
-
-                entity.Property(e => e.UserEmail)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.UserPhone)
-                    .IsRequired()
-                    .HasMaxLength(11);
-            });
-
-            modelBuilder.Entity<UserConfirm>(entity =>
-            {
-                entity.HasKey(e => e.UserId);
-
-                entity.Property(e => e.UserId)
-                    .HasColumnName("UserID")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.RegistrationDate).HasColumnType("date");
-
-                entity.Property(e => e.Token).HasMaxLength(50);
-
-                entity.Property(e => e.UserEmail)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.HasOne(d => d.User)
-                    .WithOne(p => p.UserConfirm)
-                    .HasForeignKey<UserConfirm>(d => d.UserId)
-                    .HasConstraintName("FK_UserConfirm_User");
+                entity.HasOne(d => d.UserOrders)
+                .WithMany(p => p.Tickets)
+                .HasForeignKey(d => d.OrderID)
+                .HasConstraintName("FK_Ticket_UserOrders");
             });
 
             modelBuilder.Entity<UserOrders>(entity =>
@@ -197,13 +153,15 @@ namespace Cinema.Models
 
                 entity.Property(e => e.OrderId)
                     .HasColumnName("OrderID")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
-                entity.Property(e => e.UserId).HasColumnName("UserID");
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
 
-                entity.HasOne(d => d.User)
+                entity.HasOne(d => d.Use)
                     .WithMany(p => p.UserOrders)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_UserOrders_User");

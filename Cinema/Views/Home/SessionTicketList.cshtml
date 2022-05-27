@@ -1,0 +1,47 @@
+﻿@model Cinema.Models.Session
+
+    <span class="CloseVP" onclick="closeTicketPage(event)"></span>
+    <div class="TicketList">
+        <div class="HallSchema">
+            <div class="Screen"><span>Экран</span></div>
+            @for (int i = 0; i < Model.Ticket.GroupBy(ticket => ticket.SeatRow).Count(); i++)
+            {
+                <div class="Row" id="@(i+1)">
+                    <span class="RowTxt" id="RowLeft">@(i+1)</span>
+                    <div class="Seats">
+                        @foreach (var seat in Model.Ticket.Where(row => row.SeatRow == i + 1).ToList())
+                        {
+                            if (seat.OrderID == null)
+                            {
+                                <div class="Seat" id="@seat.TicketId" onclick="seatClick(event)">
+                                    <input class="free" type="checkbox">
+                                    <span class="seatNum">@seat.SeatNumber</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="Lock" id="@seat.TicketId">
+                                    <span class="seatNum">@seat.SeatNumber</span>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <span class="RowTxt" id="RowRight">@(i+1)</span>
+                </div>
+            }
+        </div>
+        <div class="CurrentOrder">
+            <span class="CurrentOrderTxt">Текущий заказ</span><br>
+            <span> @Model.Film.FilmName </span>
+            <span> @Model.SessionDateTime </span>
+            <div class="tickets">
+                <span class="ticketTxt">Ряд/Место:</span>
+            </div>
+            <div class="err"></div>
+            <div class="orderSum">
+                <span class="orderSumTxt">Итого: </span>
+                <span class="orderSumRes"></span>
+            </div>
+            <input class="btn-type" type="button" value="Купить" onclick="buyTickets(event)" />
+        </div>
+    </div>
